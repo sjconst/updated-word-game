@@ -27,10 +27,14 @@ function createObj(str){
 createObj(currentWord);
 var wordObj = new words.Word(letterArr);
 //Prompt user for guess
-var numGuesses = 30;
+var numGuesses = 8;
 function getPrompt(){        
     if(numGuesses > 0){
-        var displayLetters = wordObj.repWord();
+        var displayLetters = wordObj.repWord(); 
+        if(displayLetters.indexOf("_") === -1){
+            console.log("You won!");
+            return;
+        }
         inquirer
         .prompt([
             {
@@ -39,17 +43,14 @@ function getPrompt(){
             }
         ])
         .then(function(response){ 
-            let userInput = response.guess.toLowerCase();
-            if(letterArr.includes(userInput)){
-                console.log("good guess!")
-            } else {
+            let userInput = response.guess.toLowerCase();   
             numGuesses--;
-            }
-            wordObj.getGuess(userInput);           
+            wordObj.getGuess(userInput);   
+            console.log(`word object ${wordObj.arr[0].guessed}`);        
             getPrompt();
         })
     } else {
-        console.log("Sorry, you're out of guesses, you loose")
+        console.log("Sorry, you're out of guesses, you lose")
     }
 }
 getPrompt();

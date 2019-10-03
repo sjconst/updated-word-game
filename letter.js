@@ -15,12 +15,10 @@ class Letter {
     }
     //A function that takes a character as an argument and checks it against the underlying character, updating the stored boolean value to true if it was guessed correctly
     checkGuess(char){       
-        if(char === this.character){
-             this.guessed = true;
-             return true;
-        } else{
-            this.guessed = false;
-            return false;
+        if(char === this.character || this.guessed === true){
+             this.guessed = true;            
+        } else {
+            this.guessed = false;           
         }
     }
 }
